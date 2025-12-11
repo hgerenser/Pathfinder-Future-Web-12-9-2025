@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pathfinder Future | Equipping the Next Generation</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- BRAND VARIABLES --- */
+        :root {
+            --pathfinder-blue: #1E4E8C;
+            --future-teal: #2AB7CA;
+            --horizon-yellow: #FFD166;
+            --neutral-gray: #F5F5F5;
+            --deep-navy: #082545;
+            --white: #FFFFFF;
+        }
+
+        /* --- GLOBAL STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--neutral-gray);
+            color: var(--deep-navy);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            transition: 0.3s ease;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--pathfinder-blue);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--deep-navy);
+        }
+
+        .btn-accent {
+            background-color: var(--horizon-yellow);
+            color: var(--deep-navy);
+        }
+
+        .btn-accent:hover {
+            background-color: #ffc133;
+        }
+
+        /* --- HEADER & NAV --- */
+        header {
+            background-color: var(--white);
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--pathfinder-blue);
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--deep-navy);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--future-teal);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: linear-gradient(135deg, var(--deep-navy) 0%, var(--pathfinder-blue) 100%);
+            color: var(--white);
+            padding: 100px 5%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        /* --- MISSION / VALUES --- */
+        .mission {
+            padding: 80px 5%;
+            background-color: var(--white);
+            text-align: center;
+        }
+
+        .mission h2 {
+            font-size: 2.5rem;
+            color: var(--pathfinder-blue);
+            margin-bottom: 15px;
+        }
+
+        .mission-subtitle {
+            color: var(--future-teal);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 50px;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .value-card {
+            padding: 30px;
+            background: var(--neutral-gray);
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .value-icon {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* --- OFFERINGS --- */
+        .offerings {
+            padding: 80px 5%;
+            background-color: var(--neutral-gray);
+        }
+
+        .offerings-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .offerings-text h2 {
+            color: var(--pathfinder-blue);
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+        }
+
+        .offerings-text p {
+            margin-bottom: 20px;
+        }
+
+        .offering-list li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+            font-weight: 600;
+        }
+
+        .offering-list li::before {
+            content: "✓";
+            color: var(--future-teal);
+            position: absolute;
+            left: 0;
+            font-weight: 800;
+        }
+
+        .offerings-image {
+            background-color: #ddd; /* Placeholder for image */
+            height: 400px;
+            border-radius: 10px;
+            background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'); /* Collaborative working image */
+            background-size: cover;
+            background-position: center;
+            border-bottom: 8px solid var(--horizon-yellow);
+        }
+
+        /* --- CTA SECTION --- */
+        .cta-section {
+            background-color: var(--future-teal);
+            padding: 80px 5%;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .cta-section h2 {
+            margin-bottom: 20px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--deep-navy);
+            color: var(--white);
+            padding: 60px 5% 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: var(--horizon-yellow);
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #ccc;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--white);
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                right: 0;
+                background: var(--white);
+                width: 100%;
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .offerings-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">PATHFINDER FUTURE.</div>
+        <nav>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#programs">Programs</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#" class="btn btn-primary" style="padding: 8px 20px; margin-left: 10px;">Login</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-menu-btn" onclick="toggleMenu()">☰</div>
+    </header>
+
+    <section class="hero" id="home">
+        <h1>Thrive in the<br>Future of Work.</h1>
+        <p>Equipping the next generation with the clarity, confidence, and adaptability they need to navigate a changing world. Skills > Degrees.</p>
+        <div class="hero-buttons">
+            <a href="#programs" class="btn btn-accent">Explore Programs</a>
+            <a href="#about" class="btn btn-primary" style="border: 1px solid white;">Our Mission</a>
+        </div>
+    </section>
+
+    <section class="mission" id="about">
+        <p class="mission-subtitle">Why Pathfinder?</p>
+        <h2>Preparation, Not Panic.</h2>
+        <p style="max-width: 800px; margin: 0 auto;">The world is evolving, and so should education. We don't fear the future; we build the toolkit to master it. Our independent studies approach empowers students to take ownership of their learning journey.</p>
+        
+        <div class="values-grid">
+            <div class="value-card">
+                <span class="value-icon">💡</span>
+                <h3>Empowerment</h3>
+                <p>Moving from passive learning to active creation. Students sit in the driver's seat.</p>
+            </div>
+            <div class="value-card">
+                <span class="value-icon">🚀</span>
+                <h3>Innovation</h3>
+                <p>Embracing AI and new tech as tools for creativity, not obstacles to avoid.</p>
+            </div>
+            <div class="value-card">
+                <span class="value-icon">🤝</span>
+                <h3>Collaboration</h3>
+                <p>Learning is better together. We foster mentorship and peer-to-peer growth.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="offerings" id="programs">
+        <div class="offerings-container">
+            <div class="offerings-image">
+                </div>
+            <div class="offerings-text">
+                <h2>Skills for Tomorrow</h2>
+                <p>We look beyond traditional curriculum to teach what truly matters in the modern workforce: adaptability, digital literacy, and critical thinking.</p>
+                <ul class="offering-list">
+                    <li>AI Literacy & Ethics Workshops</li>
+                    <li>Independent Study Career Mapping</li>
+                    <li>Project-Based Portfolios</li>
+                    <li>Financial & Digital Wellness</li>
+                </ul>
+                <br>
+                <a href="#" class="btn btn-primary">View Course Catalog</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="contact">
+        <h2>Ready to Build a Brighter Future?</h2>
+        <p style="margin-bottom: 30px;">Join a community of parents and students who are turning uncertainty into opportunity.</p>
+        <a href="#" class="btn btn-accent">Start Your Journey</a>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>Pathfinder Future</h4>
+                <p>Napa, California</p>
+                <p>Clarity, Confidence, Direction.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our Programs</a></li>
+                    <li><a href="#">For Parents</a></li>
+                    <li><a href="#">For Educators</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Connect</h4>
+                <ul>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#">Newsletter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2024 Pathfinder Future. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            nav.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
